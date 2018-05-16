@@ -6,7 +6,7 @@ import time
 local_ip = socket.gethostbyname(socket.getfqdn())
 drone = tellopy.Tello()
 
-speed = 1
+speed = 20
 
 drone.connect()
 
