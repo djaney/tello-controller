@@ -1,33 +1,39 @@
-from tello import Tello
+import tellopy
 import socket
 import keyboard
+import time
 
 local_ip = socket.gethostbyname(socket.getfqdn())
-controller = Tello(local_ip, 32768)
+drone = tellopy.Tello()
 
 speed = 1
+
+drone.connect()
+
+drone.wait_for_connection(60.0)
 
 while True:  # making a loop
     try:
         if keyboard.is_pressed('w'):
-            controller.move_forward(speed)
+            drone.move_forward(speed)
             break
         elif keyboard.is_pressed('a'):
-            controller.move_left(speed)
+            drone.move_left(speed)
             break
         elif keyboard.is_pressed('s'):
-            controller.move_backward(speed)
+            drone.move_backward(speed)
             break
         elif keyboard.is_pressed('d'):
-            controller.move_right(speed)
+            drone.move_right(speed)
             break
         elif keyboard.is_pressed('space'):
-            controller.move_up(speed)
+            drone.move_up(speed)
             break
         elif keyboard.is_pressed('ctrl'):
-            controller.move_down(speed)
+            drone.move_down(speed)
             break
         else:
             pass
     except:
         break
+    time.sleep(0.1)
